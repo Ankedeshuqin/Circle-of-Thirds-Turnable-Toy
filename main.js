@@ -1,6 +1,6 @@
 /*
 三度圈和弦大转盘玩具
-Made by Encore (安可).
+Made by Anke (安可).
 2021.7 (v1)
 2022.1 (v2)
     对当前选定的和弦增加闪烁动画
@@ -10,12 +10,12 @@ Made by Encore (安可).
 
 /*
 明确一下术语
-	调性：key
-	音符（相对音高）：note
-	音符（绝对音高）：tone
-	主音：tonal
-	和弦：chord
-	调性主音：keyTonal
+    调性：key
+    音符（相对音高）：note
+    音符（绝对音高）：tone
+    主音：tonal
+    和弦：chord
+    调性主音：keyTonal
 */
 
 //常量

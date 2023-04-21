@@ -5,7 +5,7 @@ Made by Anke (安可).
 2022.1 (v2)
     对当前选定的和弦增加闪烁动画
     点击中心部分前两组箭头时，离调和弦直接进行至主调内和弦，变和弦一律进行至调式原始和弦
-	修改了转调拖动时的阴影颜色
+    修改了转调拖动时的阴影颜色
 */
 
 /*
@@ -123,9 +123,9 @@ group=["i","I","iii","III","v","V","vii","VII","ii","II","iv","IV","vi","VI"];
 let r=33;
 let rhpp=r-0.5;
 for(let i=0;i<14;i++){
-	let th=(i-1)*360/14;
-	let thpp=i*360/14;
-	let thLabel=(i%2==0 ? (i-1/6)*360/14 : (i-5/6)*360/14);
+    let th=(i-1)*360/14;
+    let thpp=i*360/14;
+    let thLabel=(i%2==0 ? (i-1/6)*360/14 : (i-5/6)*360/14);
     let path=document.createElementNS(NS,"path");
     let d="M0 0 "+r*Math.sin(Rad(th))+" "+r*-Math.cos(Rad(th))+"A"+r+" "+r+" 0 0 1 "+r*Math.sin(Rad(thpp))+" "+r*-Math.cos(Rad(thpp));
     path.setAttribute("d",d);
@@ -148,12 +148,12 @@ scaleNotes=[,0,2,4,5,7,9,11]; //自然音下音阶各音相对其主音的相对
 HlFill={none:"none",highlighted:"rgba(255,255,255,0.25)",selected:"rgba(0,0,0,0.25)",shadowed:"rgba(64,64,64,0.75)",transposable:"rgba(255,255,0,0.5)"}; //用于呈现高亮效果
 cells=[];
 for(let hang=0;hang<24;hang++){
-	cells[hang]=[];
-	let r=32-hang;
-	let rpp=r-1;
-	let lineH=0.45-0.01*hang; //用于绘制标签，代表标签一行字的高度
-	let rLabel1=r-0.5+lineH/2;
-	let rLabel2=r-0.5-lineH/2;
+    cells[hang]=[];
+    let r=32-hang;
+    let rpp=r-1;
+    let lineH=0.45-0.01*hang; //用于绘制标签，代表标签一行字的高度
+    let rLabel1=r-0.5+lineH/2;
+    let rLabel2=r-0.5-lineH/2;
     for(let lie=0;lie<42;lie++){
         let notes=[]; //用来记录各和弦组成音相对当前调性主音的相对音高。
         for(let i=0;i<tableData[hang][lie][2].length;i++){
@@ -174,10 +174,10 @@ for(let hang=0;hang<24;hang++){
             //修正一下八度，使组成音相对音高由低到高
             if(i!=0 && notes[i]<notes[i-1]) notes[i]+=12;
         }
-		//调整一下八度，将根音的相对音高大于等于7（即自然五级音）的和弦降低一个八度，以限定和弦的音高范围。
-		if(notes[0]>=7){
-			for(let i=0;i<notes.length;i++) notes[i]-=12;
-		}
+        //调整一下八度，将根音的相对音高大于等于7（即自然五级音）的和弦降低一个八度，以限定和弦的音高范围。
+        if(notes[0]>=7){
+            for(let i=0;i<notes.length;i++) notes[i]-=12;
+        }
         //判断和弦的增六度（减三度）出现在第几个音符。-1表示没有，0~2表示出现在第0~2个音符。
         let aug6Point=-1; 
         for(let i=0;i<notes.length-1;i++){
@@ -187,20 +187,20 @@ for(let hang=0;hang<24;hang++){
             }
         }        
         
-		let th=(lie-3)*360/42;
-		let thpp=(lie-2)*360/42;
-		let thhpp=(lie-2.5)*360/42;
-		let graph=document.createElementNS(NS,"g"); //该单元格的所有可见元素，包括单元格图形、标签、高亮。鼠标事件也加在graph上。
-		let path=document.createElementNS(NS,"path");
-		let d="M"+r*Math.sin(Rad(th))+" "+r*-Math.cos(Rad(th))+" A"+r+" "+r+" 0 0 1 "+r*Math.sin(Rad(thpp))+" "+r*-Math.cos(Rad(thpp))+"L"+rpp*Math.sin(Rad(thpp))+" "+rpp*-Math.cos(Rad(thpp))+" A"+r+" "+r+" 0 0 0 "+rpp*Math.sin(Rad(th))+" "+rpp*-Math.cos(Rad(th));
-		path.setAttribute("d",d);
-		path.setAttribute("fill",colors[tableData[hang][lie][0]]);
-		graph.appendChild(path);
-		let label1=document.createElementNS(NS,"text");
-		label1.setAttribute("style","font-size:"+lineH);
-		label1.textContent=tableData[hang][lie][1];
-		label1.setAttribute("transform","translate("+rLabel1*Math.sin(Rad(thhpp))+","+rLabel1*-Math.cos(Rad(thhpp))+") rotate("+thhpp+")");
-		graph.appendChild(label1);
+        let th=(lie-3)*360/42;
+        let thpp=(lie-2)*360/42;
+        let thhpp=(lie-2.5)*360/42;
+        let graph=document.createElementNS(NS,"g"); //该单元格的所有可见元素，包括单元格图形、标签、高亮。鼠标事件也加在graph上。
+        let path=document.createElementNS(NS,"path");
+        let d="M"+r*Math.sin(Rad(th))+" "+r*-Math.cos(Rad(th))+" A"+r+" "+r+" 0 0 1 "+r*Math.sin(Rad(thpp))+" "+r*-Math.cos(Rad(thpp))+"L"+rpp*Math.sin(Rad(thpp))+" "+rpp*-Math.cos(Rad(thpp))+" A"+r+" "+r+" 0 0 0 "+rpp*Math.sin(Rad(th))+" "+rpp*-Math.cos(Rad(th));
+        path.setAttribute("d",d);
+        path.setAttribute("fill",colors[tableData[hang][lie][0]]);
+        graph.appendChild(path);
+        let label1=document.createElementNS(NS,"text");
+        label1.setAttribute("style","font-size:"+lineH);
+        label1.textContent=tableData[hang][lie][1];
+        label1.setAttribute("transform","translate("+rLabel1*Math.sin(Rad(thhpp))+","+rLabel1*-Math.cos(Rad(thhpp))+") rotate("+thhpp+")");
+        graph.appendChild(label1);
         let label2=document.createElementNS(NS,"text");
         label2.setAttribute("style","font-size:"+lineH);
         if(aug6Point==-1){
@@ -225,88 +225,88 @@ for(let hang=0;hang<24;hang++){
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //关于单元格选择的鼠标事件已整合到后面“交互”部分中（因为要先高亮才能鼠标选择）。而单元格的鼠标事件只保留高亮和取消高亮就够了。
         
-		graph.addEventListener("mouseover",function(){
+        graph.addEventListener("mouseover",function(){
             highlight(hang,lie);
         })
         
-		graph.addEventListener("mouseout",function(){
-			unhighlight();
-		})
+        graph.addEventListener("mouseout",function(){
+            unhighlight();
+        })
 
-		c2.appendChild(graph);
+        c2.appendChild(graph);
         
         let cell={
             graph:graph,
-			hl:hl,
+            hl:hl,
             notes:notes,
             aug6Point:aug6Point,
             //因为bringNotes后就和tableData内的值不一样了，而bringNotes时应当循环参照tableData内的值，所以应当另记为单元格对象属性才好。
             name:tableData[hang][lie][1],
             notesSig:tableData[hang][lie][2] //组成音标记
-		};
+        };
         cells[hang][lie]=cell;
-	}
+    }
 }
 //bringNotes，不能直接bring进原tableData里，因为bringNotes时还要循环参照tableData内的值。
 function bringNotes(hang,lie){
-	let minMaj=(Math.floor(lie/3)%2==0 ? "min" : "maj");
-	let tempHang=hang;
-	let tempLie=lie;
-	if(hang%2==1 && tableData[hang][lie][0]==tableData[hang-1][lie][0] && tableData[hang-1][lie][1]){
-		tempHang--;
-	}else{
-		do{
-			if(minMaj=="min"){
-				if(tempLie%3!=2){
-					tempLie++;
-				}else{
-					tempLie=lie;
-					tempHang--;
-				}
-			}else{
-				if(tempLie%3!=0){
-					tempLie--;
-				}else{
-					tempLie=lie;
-					tempHang--;
-				}
-			}
-		}while(tableData[tempHang][tempLie][0]!=tableData[hang][lie][0])
-	}
-	if(!cells[tempHang][tempLie].name) bringNotes(tempHang,tempLie);
-	
-	cells[hang][lie].notes=cells[tempHang][tempLie].notes;
-	cells[hang][lie].aug6Point=cells[tempHang][tempLie].aug6Point;
+    let minMaj=(Math.floor(lie/3)%2==0 ? "min" : "maj");
+    let tempHang=hang;
+    let tempLie=lie;
+    if(hang%2==1 && tableData[hang][lie][0]==tableData[hang-1][lie][0] && tableData[hang-1][lie][1]){
+        tempHang--;
+    }else{
+        do{
+            if(minMaj=="min"){
+                if(tempLie%3!=2){
+                    tempLie++;
+                }else{
+                    tempLie=lie;
+                    tempHang--;
+                }
+            }else{
+                if(tempLie%3!=0){
+                    tempLie--;
+                }else{
+                    tempLie=lie;
+                    tempHang--;
+                }
+            }
+        }while(tableData[tempHang][tempLie][0]!=tableData[hang][lie][0])
+    }
+    if(!cells[tempHang][tempLie].name) bringNotes(tempHang,tempLie);
+    
+    cells[hang][lie].notes=cells[tempHang][tempLie].notes;
+    cells[hang][lie].aug6Point=cells[tempHang][tempLie].aug6Point;
     cells[hang][lie].name=cells[tempHang][tempLie].name;
     cells[hang][lie].notesSig=cells[tempHang][tempLie].notesSig;
 }
 for(let hang=0;hang<24;hang++){
-	for(let lie=0;lie<42;lie++){
-		if(!cells[hang][lie].name) bringNotes(hang,lie);
-	}
+    for(let lie=0;lie<42;lie++){
+        if(!cells[hang][lie].name) bringNotes(hang,lie);
+    }
 }
 //添加经纬线
 let lineWd=0.1;
 for(let jing=0;jing<7;jing++){
-	let th=(jing-0.5)*360/7;
-	let jingxian=document.createElementNS(NS,"path");
-	jingxian.setAttribute("d","M0 0 "+32*Math.sin(Rad(th))+" "+32*-Math.cos(Rad(th)));
-	jingxian.setAttribute("stroke","#FF0000");
-	jingxian.setAttribute("stroke-width",lineWd);
-	jingxian.setAttribute("pointer-events","none");
-	c2.appendChild(jingxian);
+    let th=(jing-0.5)*360/7;
+    let jingxian=document.createElementNS(NS,"path");
+    jingxian.setAttribute("d","M0 0 "+32*Math.sin(Rad(th))+" "+32*-Math.cos(Rad(th)));
+    jingxian.setAttribute("stroke","#FF0000");
+    jingxian.setAttribute("stroke-width",lineWd);
+    jingxian.setAttribute("pointer-events","none");
+    c2.appendChild(jingxian);
 }
 for(let wei=0;wei<7;wei++){
-	let r=4*(8-wei);
-	let weixian=document.createElementNS(NS,"circle");
-	weixian.setAttribute("cx",0);
-	weixian.setAttribute("cy",0);
-	weixian.setAttribute("r",r);
-	weixian.setAttribute("fill","none");
-	weixian.setAttribute("stroke","#FF0000");
-	weixian.setAttribute("stroke-width",lineWd);
-	weixian.setAttribute("pointer-events","none");
-	c2.appendChild(weixian);
+    let r=4*(8-wei);
+    let weixian=document.createElementNS(NS,"circle");
+    weixian.setAttribute("cx",0);
+    weixian.setAttribute("cy",0);
+    weixian.setAttribute("r",r);
+    weixian.setAttribute("fill","none");
+    weixian.setAttribute("stroke","#FF0000");
+    weixian.setAttribute("stroke-width",lineWd);
+    weixian.setAttribute("pointer-events","none");
+    c2.appendChild(weixian);
 }
 svg.appendChild(c2);
 
@@ -319,28 +319,28 @@ c.setAttribute("r",8);
 c.setAttribute("fill","#FFFFFF");
 c3.appendChild(c);
 function drawArrowMark(ang,fill,x,y){
-	let ar=document.createElementNS(NS,"path");
-	ar.setAttribute("d","m0 -0.1 0.2 0.4 -0.4 0");
-	ar.setAttribute("fill",fill);
-	ar.setAttribute("transform","translate("+x+","+y+") rotate("+ang+")");
-	ar.setAttribute("pointer-events","painted");
+    let ar=document.createElementNS(NS,"path");
+    ar.setAttribute("d","m0 -0.1 0.2 0.4 -0.4 0");
+    ar.setAttribute("fill",fill);
+    ar.setAttribute("transform","translate("+x+","+y+") rotate("+ang+")");
+    ar.setAttribute("pointer-events","painted");
     ar.setAttribute("style","cursor:pointer");
-	return ar;
+    return ar;
 }
 for(let i=0;i<7;i++){
-	let ang=360/7*i;
-	let ar1g=document.createElementNS(NS,"g");
-	let ar1=document.createElementNS(NS,"path");
-	ar1.setAttribute("d","M"+7.4*Math.sin(Rad(ang))+" "+7.4*-Math.cos(Rad(ang))+"A9 9 0 0 0 "+7.4*Math.sin(Rad(360/7*(i+2)-2*360/168))+" "+7.4*-Math.cos(Rad(360/7*(i+2)-2*360/168)));
-	ar1.setAttribute("stroke","#0080FF");
-	ar1.setAttribute("fill","none");
-	ar1.setAttribute("stroke-width",0.1);
-	ar1.setAttribute("pointer-events","painted");
+    let ang=360/7*i;
+    let ar1g=document.createElementNS(NS,"g");
+    let ar1=document.createElementNS(NS,"path");
+    ar1.setAttribute("d","M"+7.4*Math.sin(Rad(ang))+" "+7.4*-Math.cos(Rad(ang))+"A9 9 0 0 0 "+7.4*Math.sin(Rad(360/7*(i+2)-2*360/168))+" "+7.4*-Math.cos(Rad(360/7*(i+2)-2*360/168)));
+    ar1.setAttribute("stroke","#0080FF");
+    ar1.setAttribute("fill","none");
+    ar1.setAttribute("stroke-width",0.1);
+    ar1.setAttribute("pointer-events","painted");
     ar1.setAttribute("style","cursor:pointer");
-	ar1g.appendChild(ar1);
-	ar1g.appendChild(drawArrowMark(ang-2*360/168,"#0080FF",7.4*Math.sin(Rad(ang)),7.4*-Math.cos(Rad(ang))));
-	ar1g.appendChild(drawArrowMark(360/7*(i+2),"#FF8000",7.4*Math.sin(Rad(360/7*(i+2)-2*360/168)),7.4*-Math.cos(Rad(360/7*(i+2)-2*360/168))));
-	c3.appendChild(ar1g);
+    ar1g.appendChild(ar1);
+    ar1g.appendChild(drawArrowMark(ang-2*360/168,"#0080FF",7.4*Math.sin(Rad(ang)),7.4*-Math.cos(Rad(ang))));
+    ar1g.appendChild(drawArrowMark(360/7*(i+2),"#FF8000",7.4*Math.sin(Rad(360/7*(i+2)-2*360/168)),7.4*-Math.cos(Rad(360/7*(i+2)-2*360/168))));
+    c3.appendChild(ar1g);
     ar1g.addEventListener("mousedown",function(){
         if(g_Selected.coord()!="-1,-1"){
             if(Math.floor(g_Selected.lie/6)==i){
@@ -350,8 +350,8 @@ for(let i=0;i<7;i++){
             }
         }
     })
-	
-	let ar2g=document.createElementNS(NS,"g");
+    
+    let ar2g=document.createElementNS(NS,"g");
     let ar2=document.createElementNS(NS,"path");
     ar2.setAttribute("d","M" + 7.4*Math.sin(Rad(ang+2*360/168)) + " " + 7.4*-Math.cos(Rad(ang+2*360/168)) + "A12.5 12.5 0 0 1 " + 4.9*Math.sin(Rad(360/7*(i+1)+255/49)) + " " + 4.9*-Math.cos(Rad(360/7*(i+1)+255/49)));
     ar2.setAttribute("stroke","#FF8000");
@@ -371,8 +371,8 @@ for(let i=0;i<7;i++){
             }
         }
     })
-	
-	let ar3g=document.createElementNS(NS,"g");
+    
+    let ar3g=document.createElementNS(NS,"g");
     let ar3=document.createElementNS(NS,"path");
     ar3.setAttribute("d","M" + 7.4*Math.sin(Rad(ang+4*360/168)) + " " + 7.4*-Math.cos(Rad(ang+4*360/168)) + "L " + 7.4*Math.sin(Rad(360/7*(i+1)-4*360/168)) + " " + 7.4*-Math.cos(Rad(360/7*(i+1)-4*360/168)));
     ar3.setAttribute("stroke","#FF8000");
@@ -432,16 +432,16 @@ function getKeyTonalTone(keySharpness){
 
 function setCurKey(){
     if(g_Selected.coord()!="-1,-1"){
-		stopChord(cells[g_Selected.hang][g_Selected.lie].notes);
+        stopChord(cells[g_Selected.hang][g_Selected.lie].notes);
     }
     
-	g_IniKeySharpness=getSharpness(SIniKeyTonal.options[SIniKeyTonal.selectedIndex].value);
+    g_IniKeySharpness=getSharpness(SIniKeyTonal.options[SIniKeyTonal.selectedIndex].value);
     g_CurKeySharpness=g_IniKeySharpness+g_CurTransSharpness;
     g_CurKeyTonalTone=getKeyTonalTone(g_CurKeySharpness);
     TCurKeyTonal.textContent=getKeysig(g_CurKeySharpness);
     
     if(g_Selected.coord()!="-1,-1"){
-		playChord(cells[g_Selected.hang][g_Selected.lie].notes);
+        playChord(cells[g_Selected.hang][g_Selected.lie].notes);
     }
 }
 setCurKey();
@@ -452,73 +452,73 @@ SIniKeyTonal.onchange=function(){
 
 BReset.onclick=function(){
     if(g_Selected.coord()!="-1,-1") unselect();
-	g_CurTransSharpness=0;
-	g_CurRotateShanqu=0;
-	setCurKey();
-	c2.setAttribute("transform","rotate(0)");
-	c3.setAttribute("transform","rotate(0)");
+    g_CurTransSharpness=0;
+    g_CurRotateShanqu=0;
+    setCurKey();
+    c2.setAttribute("transform","rotate(0)");
+    c3.setAttribute("transform","rotate(0)");
 }
 
 function playChord(notes){
-	for(let i=0;i<notes.length;i++) tones[notes[i]+g_CurKeyTonalTone].play();
+    for(let i=0;i<notes.length;i++) tones[notes[i]+g_CurKeyTonalTone].play();
 }
 
 function stopChord(notes){
-	for(let i=0;i<notes.length;i++) tones[notes[i]+g_CurKeyTonalTone].load();
+    for(let i=0;i<notes.length;i++) tones[notes[i]+g_CurKeyTonalTone].load();
 }
 
 function showChordInfo(hang,lie,box){
-	box.style.backgroundColor=colors[tableData[hang][lie][0]];
-	box.textContent=cells[hang][lie].name;
-	box.appendChild(document.createElement("br"));
-	if(cells[hang][lie].aug6Point==-1){
-		box.append(cells[hang][lie].notesSig.join(""));
-	}else{
-		box.append(cells[hang][lie].notesSig.slice(0,cells[hang][lie].aug6Point).join(""));
-		let tspan=document.createElement("span");
-		tspan.style.color="#FF0000";
-		tspan.textContent=cells[hang][lie].notesSig.slice(cells[hang][lie].aug6Point,cells[hang][lie].aug6Point+2).join("");
-		box.appendChild(tspan);
-		box.append(cells[hang][lie].notesSig.slice(cells[hang][lie].aug6Point+2).join(""));
-	}
-	if(box==DChordBox){
-		if(Math.floor(hang/4)!=0) DChordDescription.append("向");
-		DChordDescription.append((Math.floor(lie/3)%2==1 ? "大调" : "小调"));
-		switch(Math.floor(hang/4)){
-			case 1:
-			DChordDescription.append((Math.floor(lie/3)%2==1 ? "DT" : "dt"));break;
-			case 2:
-			DChordDescription.append((Math.floor(lie/3)%2==1 ? "D" : "d"));break;
-			case 3:
-			DChordDescription.append((Math.floor(lie/3)%2==1 ? "SII" : "dVII"));break;
-			case 4:
-			DChordDescription.append((Math.floor(lie/3)%2==1 ? "S" : "s"));break;
-			case 5:
-			DChordDescription.append((Math.floor(lie/3)%2==1 ? "TS" : "ts"));break;
-		}
-		DChordDescription.append((hang%2==0 ? "自然调式" : "和声调式"));
-		DChordDescription.append((Math.floor(hang/4)==0 ? "调内" : "离调的"));
-		DChordDescription.append((Math.floor(hang/2)%2==0 ? "三和弦" : "七和弦"));
-		switch(lie%6){
-			case 0:
-			DChordDescription.append((Math.floor(hang/4)%2==0 ? "，降调式四级变和弦" : "，升调式二级变和弦"));break;
-			case 1:
-			case 4:
-			DChordDescription.append("，降调式二级变和弦");break;
-			case 5:
-			DChordDescription.append((Math.floor(hang/4)%2==0 ? "，升调式二级变和弦" : "，降调式四级变和弦"));
-		}
-	}
+    box.style.backgroundColor=colors[tableData[hang][lie][0]];
+    box.textContent=cells[hang][lie].name;
+    box.appendChild(document.createElement("br"));
+    if(cells[hang][lie].aug6Point==-1){
+        box.append(cells[hang][lie].notesSig.join(""));
+    }else{
+        box.append(cells[hang][lie].notesSig.slice(0,cells[hang][lie].aug6Point).join(""));
+        let tspan=document.createElement("span");
+        tspan.style.color="#FF0000";
+        tspan.textContent=cells[hang][lie].notesSig.slice(cells[hang][lie].aug6Point,cells[hang][lie].aug6Point+2).join("");
+        box.appendChild(tspan);
+        box.append(cells[hang][lie].notesSig.slice(cells[hang][lie].aug6Point+2).join(""));
+    }
+    if(box==DChordBox){
+        if(Math.floor(hang/4)!=0) DChordDescription.append("向");
+        DChordDescription.append((Math.floor(lie/3)%2==1 ? "大调" : "小调"));
+        switch(Math.floor(hang/4)){
+            case 1:
+            DChordDescription.append((Math.floor(lie/3)%2==1 ? "DT" : "dt"));break;
+            case 2:
+            DChordDescription.append((Math.floor(lie/3)%2==1 ? "D" : "d"));break;
+            case 3:
+            DChordDescription.append((Math.floor(lie/3)%2==1 ? "SII" : "dVII"));break;
+            case 4:
+            DChordDescription.append((Math.floor(lie/3)%2==1 ? "S" : "s"));break;
+            case 5:
+            DChordDescription.append((Math.floor(lie/3)%2==1 ? "TS" : "ts"));break;
+        }
+        DChordDescription.append((hang%2==0 ? "自然调式" : "和声调式"));
+        DChordDescription.append((Math.floor(hang/4)==0 ? "调内" : "离调的"));
+        DChordDescription.append((Math.floor(hang/2)%2==0 ? "三和弦" : "七和弦"));
+        switch(lie%6){
+            case 0:
+            DChordDescription.append((Math.floor(hang/4)%2==0 ? "，降调式四级变和弦" : "，升调式二级变和弦"));break;
+            case 1:
+            case 4:
+            DChordDescription.append("，降调式二级变和弦");break;
+            case 5:
+            DChordDescription.append((Math.floor(hang/4)%2==0 ? "，升调式二级变和弦" : "，降调式四级变和弦"));
+        }
+    }
 }
 
 function clearChordInfo(box){
-	box.style.backgroundColor="transparent";
-	box.textContent="";
-	box.appendChild(document.createElement("br"));
-	box.appendChild(document.createElement("br"));
-	if(box==DChordBox){
-		DChordDescription.textContent="";
-	}
+    box.style.backgroundColor="transparent";
+    box.textContent="";
+    box.appendChild(document.createElement("br"));
+    box.appendChild(document.createElement("br"));
+    if(box==DChordBox){
+        DChordDescription.textContent="";
+    }
 }
 
 function flashingLoop(){ //用于呈现选定单元格闪烁动画
@@ -529,13 +529,13 @@ function flashingLoop(){ //用于呈现选定单元格闪烁动画
 let loopID;
 
 function select(hang,lie){
-	if(g_Selected.coord()!="-1,-1") unselect();
-	g_Selected.hang=hang;
-	g_Selected.lie=lie;
-	cells[hang][lie].hl.setAttribute("fill",HlFill.selected);
-	playChord(cells[hang][lie].notes);
-	clearChordInfo(DChordBox);
-	showChordInfo(hang,lie,DChordBox);
+    if(g_Selected.coord()!="-1,-1") unselect();
+    g_Selected.hang=hang;
+    g_Selected.lie=lie;
+    cells[hang][lie].hl.setAttribute("fill",HlFill.selected);
+    playChord(cells[hang][lie].notes);
+    clearChordInfo(DChordBox);
+    showChordInfo(hang,lie,DChordBox);
     
     loopID=setInterval(flashingLoop,500);
 }
@@ -543,15 +543,15 @@ function select(hang,lie){
 function unselect(){
     clearInterval(loopID);
     cells[g_Selected.hang][g_Selected.lie].hl.removeAttribute("visibility");
-	if(g_Selected.coord()==g_Highlighted.coord()){
-		cells[g_Selected.hang][g_Selected.lie].hl.setAttribute("fill",HlFill.highlighted);
-	}else{
-		cells[g_Selected.hang][g_Selected.lie].hl.setAttribute("fill",HlFill.none);
-	}
-	stopChord(cells[g_Selected.hang][g_Selected.lie].notes);
-	if(g_Highlighted.coord()=="-1,-1") clearChordInfo(DChordBox);
-	g_Selected.hang=-1;
-	g_Selected.lie=-1;
+    if(g_Selected.coord()==g_Highlighted.coord()){
+        cells[g_Selected.hang][g_Selected.lie].hl.setAttribute("fill",HlFill.highlighted);
+    }else{
+        cells[g_Selected.hang][g_Selected.lie].hl.setAttribute("fill",HlFill.none);
+    }
+    stopChord(cells[g_Selected.hang][g_Selected.lie].notes);
+    if(g_Highlighted.coord()=="-1,-1") clearChordInfo(DChordBox);
+    g_Selected.hang=-1;
+    g_Selected.lie=-1;
 }
 
 function highlight(hang,lie){
@@ -612,7 +612,7 @@ function FixedNotes(notes){ //用于在实行转调时判断两和弦各组成�
 DRight.addEventListener("mousedown",function(e){
     //若在空白区域点击且当前有选择，则取消当前选择。
     bOutside=g_Highlighted.coord()=="-1,-1" && bOutsideIViewSize && bOutsideC3 && bOutsideBUndo && bOutsideBRedo;
-	if(g_Selected.coord()!="-1,-1" && bOutside) unselect();
+    if(g_Selected.coord()!="-1,-1" && bOutside) unselect();
     
     if(g_Highlighted.coord()!="-1,-1"){
         //若在单元格上点击则选择单元格，或再次点击取消选择。
@@ -642,44 +642,44 @@ DRight.addEventListener("mouseup",function(){
         c2.removeChild(tempCell);
         clearChordInfo(DBeforeTransBox);
         clearChordInfo(DAfterTransBox);
-		if(g_Highlighted.coord()!="-1,-1" && cells[g_Highlighted.hang][g_Highlighted.lie].hl.getAttribute("fill")==HlFill.transposable){ //若鼠标位于可转调和弦
-			//实行转调操作
-			let deltaShanqu; //转调前后和弦所在扇区差
-			let deltaTonalTone; //转调前后和弦根音音高差
-			let deltaSharpness;
-			if(!bDengyin){
-				deltaShanqu=(Math.floor(g_Selected.lie/6)-Math.floor(g_Highlighted.lie/6)+7)%7;
-				deltaTonalTone=(cells[g_Selected.hang][g_Selected.lie].notes[0]-cells[g_Highlighted.hang][g_Highlighted.lie].notes[0]+12)%12;
-			}else{
-				bDengyin=false;
-				stopChord(invedNotes);
-				TDengyin.textContent="";
-				
-				let invDeltaShanqus=(tableData[g_Selected.hang][g_Selected.lie][0]!=7 ? [0,1,5,6] : [0,1,6]); //可等音转调的和弦各转位对应的相对其原和弦本身的扇区差（增三和弦由于和弦组成音数量不同故需单独判断），用curInvNo-defInvNo并限定范围后的值索引，其索引值需加于转调前后和弦所在扇区差上。
-				
-				deltaShanqu=(Math.floor(g_Selected.lie/6)-Math.floor(g_Highlighted.lie/6)+invDeltaShanqus[(tableData[g_Selected.hang][g_Selected.lie][0]!=7 ? (curInvNo-defInvNo+4)%4 : curInvNo-defInvNo)]+7)%7;
-				deltaTonalTone=(invedNotes[0]-cells[g_Highlighted.hang][g_Highlighted.lie].notes[0]+12)%12;
-			}
+        if(g_Highlighted.coord()!="-1,-1" && cells[g_Highlighted.hang][g_Highlighted.lie].hl.getAttribute("fill")==HlFill.transposable){ //若鼠标位于可转调和弦
+            //实行转调操作
+            let deltaShanqu; //转调前后和弦所在扇区差
+            let deltaTonalTone; //转调前后和弦根音音高差
+            let deltaSharpness;
+            if(!bDengyin){
+                deltaShanqu=(Math.floor(g_Selected.lie/6)-Math.floor(g_Highlighted.lie/6)+7)%7;
+                deltaTonalTone=(cells[g_Selected.hang][g_Selected.lie].notes[0]-cells[g_Highlighted.hang][g_Highlighted.lie].notes[0]+12)%12;
+            }else{
+                bDengyin=false;
+                stopChord(invedNotes);
+                TDengyin.textContent="";
+                
+                let invDeltaShanqus=(tableData[g_Selected.hang][g_Selected.lie][0]!=7 ? [0,1,5,6] : [0,1,6]); //可等音转调的和弦各转位对应的相对其原和弦本身的扇区差（增三和弦由于和弦组成音数量不同故需单独判断），用curInvNo-defInvNo并限定范围后的值索引，其索引值需加于转调前后和弦所在扇区差上。
+                
+                deltaShanqu=(Math.floor(g_Selected.lie/6)-Math.floor(g_Highlighted.lie/6)+invDeltaShanqus[(tableData[g_Selected.hang][g_Selected.lie][0]!=7 ? (curInvNo-defInvNo+4)%4 : curInvNo-defInvNo)]+7)%7;
+                deltaTonalTone=(invedNotes[0]-cells[g_Highlighted.hang][g_Highlighted.lie].notes[0]+12)%12;
+            }
             deltaSharpness=deltaSharpnessGettingStd[deltaShanqu][1]+((deltaTonalTone-deltaSharpnessGettingStd[deltaShanqu][0]+18)%12-6)*7;
             
-			//console.log("扇区差："+deltaShanqu+"，根音音高差："+deltaTonalTone+"，sharpness差："+deltaSharpness);
-			g_CurRotateShanqu=(g_CurRotateShanqu+deltaShanqu)%7;
-			g_CurTransSharpness+=deltaSharpness;
+            //console.log("扇区差："+deltaShanqu+"，根音音高差："+deltaTonalTone+"，sharpness差："+deltaSharpness);
+            g_CurRotateShanqu=(g_CurRotateShanqu+deltaShanqu)%7;
+            g_CurTransSharpness+=deltaSharpness;
 
-			c2.setAttribute("transform","rotate("+g_CurRotateShanqu*360/7+")");
-			c3.setAttribute("transform","rotate("+g_CurRotateShanqu*360/7+")");
-			unselect();
-			setCurKey();
-			select(g_Highlighted.hang,g_Highlighted.lie);
-			
-		}else if(bDengyin){ //若鼠标非位于可转调和弦，且处于等音转调状态，则切回非等音转调模式
-			//console.log("切回非等音转调模式");
-			bDengyin=false;
-			//停止播放转位和弦并重新播放原和弦
-			stopChord(invedNotes);
-			playChord(cells[g_Selected.hang][g_Selected.lie].notes);
-			TDengyin.textContent="";
-		}
+            c2.setAttribute("transform","rotate("+g_CurRotateShanqu*360/7+")");
+            c3.setAttribute("transform","rotate("+g_CurRotateShanqu*360/7+")");
+            unselect();
+            setCurKey();
+            select(g_Highlighted.hang,g_Highlighted.lie);
+            
+        }else if(bDengyin){ //若鼠标非位于可转调和弦，且处于等音转调状态，则切回非等音转调模式
+            //console.log("切回非等音转调模式");
+            bDengyin=false;
+            //停止播放转位和弦并重新播放原和弦
+            stopChord(invedNotes);
+            playChord(cells[g_Selected.hang][g_Selected.lie].notes);
+            TDengyin.textContent="";
+        }
         //遍历单元格以取消阴影。
         for(let tempHang=0;tempHang<24;tempHang++){
             for(let tempLie=0;tempLie<42;tempLie++){
@@ -694,7 +694,7 @@ let tempCell;
 DRight.addEventListener("mousemove",function(e){
     if(bCellMouseDown){
         if(!bDragging){ //因为只有从非拖动到拖动的转变瞬间才实行一次，因此要用一个变量判断卡住。
-			//（这个地方是转调拖动开始时所触发的转调操作，不可能是等音转调（等音转调只有按下回车键后才会触发））。
+            //（这个地方是转调拖动开始时所触发的转调操作，不可能是等音转调（等音转调只有按下回车键后才会触发））。
             bDragging=true; //转调拖动开始时
             if(g_Selected.coord()!="-1,-1") cells[g_Selected.hang][g_Selected.lie].hl.removeAttribute("visibility");
             if(g_Selected.coord()=="-1,-1") select(g_Highlighted.hang,g_Highlighted.lie,1); //如果此时单元格恰好被再次点击取消选中了，则重新选中它开始拖动。
@@ -721,7 +721,7 @@ DRight.addEventListener("mousemove",function(e){
 })
 
 BGetMajMin.onclick=function(){
-	if(g_Selected.coord()!="-1,-1") select(g_Selected.hang,Math.floor(g_Selected.lie/6)*6+5-g_Selected.lie%6);
+    if(g_Selected.coord()!="-1,-1") select(g_Selected.hang,Math.floor(g_Selected.lie/6)*6+5-g_Selected.lie%6);
 }
 
 //一些用于等音转调时对和弦转位的相关操作的相关变量。这些变量都应该在刚开始等音转调时被赋初始值。
@@ -746,29 +746,29 @@ availableInvNos=[
 [0,1,2] //增三和弦
 ];
 document.onkeydown=function(e){
-	switch(e.key){
-		case "ArrowDown":
-		if(g_Selected.coord()!="-1,-1") (e.ctrlKey ? select((g_Selected.hang+4)%24,g_Selected.lie,1) : select((g_Selected.hang+1)%24,g_Selected.lie));
-		e.preventDefault();break;
-		case "ArrowUp":
-		if(g_Selected.coord()!="-1,-1") (e.ctrlKey ? select((g_Selected.hang+20)%24,g_Selected.lie,1) : select((g_Selected.hang+23)%24,g_Selected.lie));
-		e.preventDefault();break;
-		case "ArrowRight":
-		if(g_Selected.coord()!="-1,-1") (e.ctrlKey ? select(g_Selected.hang,(g_Selected.lie+6)%42,1) : select(g_Selected.hang,(g_Selected.lie+1)%42));
-		e.preventDefault();break;
-		case "ArrowLeft":
-		if(g_Selected.coord()!="-1,-1") (e.ctrlKey ? select(g_Selected.hang,(g_Selected.lie+36)%42,1) : select(g_Selected.hang,(g_Selected.lie+41)%42));
-		e.preventDefault();break;
-		case "Enter":
-		if(!bCellMouseDown){ //若非在单元格上按住鼠标时才为选择对应同主大小调和弦，否则就触发等音转调的相关判断了。
+    switch(e.key){
+        case "ArrowDown":
+        if(g_Selected.coord()!="-1,-1") (e.ctrlKey ? select((g_Selected.hang+4)%24,g_Selected.lie,1) : select((g_Selected.hang+1)%24,g_Selected.lie));
+        e.preventDefault();break;
+        case "ArrowUp":
+        if(g_Selected.coord()!="-1,-1") (e.ctrlKey ? select((g_Selected.hang+20)%24,g_Selected.lie,1) : select((g_Selected.hang+23)%24,g_Selected.lie));
+        e.preventDefault();break;
+        case "ArrowRight":
+        if(g_Selected.coord()!="-1,-1") (e.ctrlKey ? select(g_Selected.hang,(g_Selected.lie+6)%42,1) : select(g_Selected.hang,(g_Selected.lie+1)%42));
+        e.preventDefault();break;
+        case "ArrowLeft":
+        if(g_Selected.coord()!="-1,-1") (e.ctrlKey ? select(g_Selected.hang,(g_Selected.lie+36)%42,1) : select(g_Selected.hang,(g_Selected.lie+41)%42));
+        e.preventDefault();break;
+        case "Enter":
+        if(!bCellMouseDown){ //若非在单元格上按住鼠标时才为选择对应同主大小调和弦，否则就触发等音转调的相关判断了。
             if(g_Selected.coord()!="-1,-1") select(g_Selected.hang,Math.floor(g_Selected.lie/6)*6+5-g_Selected.lie%6);
         }else{
-			
+            
             //单元格背景色编号为0、1、2、3、4、6、7的为可等音转调和弦。
-			//如果此时一个可等音转调的和弦的单元格恰好被再次点击取消选中了，则重新选中它以用于等音转调。
+            //如果此时一个可等音转调的和弦的单元格恰好被再次点击取消选中了，则重新选中它以用于等音转调。
             if(g_Selected.coord()=="-1,-1" && tableData[g_Highlighted.hang][g_Highlighted.lie][0]<=7 && tableData[g_Highlighted.hang][g_Highlighted.lie][0]!=5) select(g_Highlighted.hang,g_Highlighted.lie);
             
-			if(g_Selected.coord()!="-1,-1" && tableData[g_Selected.hang][g_Selected.lie][0]<=7 && tableData[g_Selected.hang][g_Selected.lie][0]!=5){
+            if(g_Selected.coord()!="-1,-1" && tableData[g_Selected.hang][g_Selected.lie][0]<=7 && tableData[g_Selected.hang][g_Selected.lie][0]!=5){
                 //触发等音转调
                 if(bDragging==false){
                     bDragging=true;
@@ -782,21 +782,21 @@ document.onkeydown=function(e){
                 if(!bDengyin){
                     //console.log("初始化等音转调变量");
                     bDengyin=true;
-					switch(tableData[g_Selected.hang][g_Selected.lie][0]){
-						case 0:
-						case 1:
-						case 2:
-						defInvNo=(3-cells[g_Selected.hang][g_Selected.lie].aug6Point)%4;break;
-						case 4: //增五七和弦
-						defInvNo=(cells[g_Selected.hang][g_Selected.lie].aug6Point==2 ? 0 : 3);break;
-						default:
-						defInvNo=0;
-					}
+                    switch(tableData[g_Selected.hang][g_Selected.lie][0]){
+                        case 0:
+                        case 1:
+                        case 2:
+                        defInvNo=(3-cells[g_Selected.hang][g_Selected.lie].aug6Point)%4;break;
+                        case 4: //增五七和弦
+                        defInvNo=(cells[g_Selected.hang][g_Selected.lie].aug6Point==2 ? 0 : 3);break;
+                        default:
+                        defInvNo=0;
+                    }
                     curInvNo=defInvNo;
                     invedNotes=cells[g_Selected.hang][g_Selected.lie].notes.slice();
-					invedName=cells[g_Selected.hang][g_Selected.lie].name;
-					invedNotesSig=cells[g_Selected.hang][g_Selected.lie].notesSig.slice();
-					invedAug6Point=cells[g_Selected.hang][g_Selected.lie].aug6Point;
+                    invedName=cells[g_Selected.hang][g_Selected.lie].name;
+                    invedNotesSig=cells[g_Selected.hang][g_Selected.lie].notesSig.slice();
+                    invedAug6Point=cells[g_Selected.hang][g_Selected.lie].aug6Point;
                     TDengyin.textContent="（等音转调）";
                 }
                 
@@ -804,121 +804,121 @@ document.onkeydown=function(e){
                 curInvNo=availableInvNos[tableData[g_Selected.hang][g_Selected.lie][0]][(availableInvNos[tableData[g_Selected.hang][g_Selected.lie][0]].indexOf(curInvNo)+availableInvNos[tableData[g_Selected.hang][g_Selected.lie][0]].length-1)%availableInvNos[tableData[g_Selected.hang][g_Selected.lie][0]].length];
                 //console.log("默认转位序数："+defInvNo+"，当前转位序数："+curInvNo);
                 
-				//在转位前先停止播放旧和弦。
-				stopChord(invedNotes);
-		
+                //在转位前先停止播放旧和弦。
+                stopChord(invedNotes);
+        
                 //先判断是不是转回了原和弦本身，若非则再继续进行剩下的转位操作，否则切回非等音转调模式。
                 if(curInvNo!=defInvNo){
                     //作成转位和弦的和弦组成音数组，以及和弦名字符串、和弦组成音标记数组、aug6Point。
                     for(let i=0;i<(availableInvNos[tableData[g_Selected.hang][g_Selected.lie][0]][(availableInvNos[tableData[g_Selected.hang][g_Selected.lie][0]].indexOf(curInvNo)+1)%availableInvNos[tableData[g_Selected.hang][g_Selected.lie][0]].length]-availableInvNos[tableData[g_Selected.hang][g_Selected.lie][0]][availableInvNos[tableData[g_Selected.hang][g_Selected.lie][0]].indexOf(curInvNo)]+cells[g_Selected.hang][g_Selected.lie].notes.length)%cells[g_Selected.hang][g_Selected.lie].notes.length;i++){
                         //根据两相邻可用转位的转位序数差决定从后往前调换几次（判断条件代表当前转位与其上一个相邻可用转位的转位序数差）。
                         invedNotes.unshift(invedNotes.pop()-12); //将末尾音音高降低八度后调至开头。
-						//替换和弦名字符串。
-						let anchor=(invedName.indexOf("/")!=-1 ? invedName.indexOf("/") : invedName.length);
-						let invSig="";
-						while(invedName.charAt(anchor-1)>="0" && invedName.charAt(anchor-1)<="9"){
-							invSig=invedName.charAt(anchor-1)+invSig;
-							anchor--;
-						}
-						switch(invSig){
-							case "7":
-							invedName=invedName.slice(0,anchor)+"2"+invedName.slice(anchor+1);break;
-							case "2":
-							invedName=invedName.slice(0,anchor)+"34"+invedName.slice(anchor+1);break;
-							case "34":
-							invedName=invedName.slice(0,anchor)+"56"+invedName.slice(anchor+2);break;
-							case "56":
-							invedName=invedName.slice(0,anchor)+"7"+invedName.slice(anchor+2);break;
-							case "":
-							invedName=invedName.slice(0,anchor)+"46"+invedName.slice(anchor);break;
-							case "46":
-							invedName=invedName.slice(0,anchor)+"6"+invedName.slice(anchor+2);break;
-							case "6":
-							invedName=invedName.slice(0,anchor)+invedName.slice(anchor+1);
-						}
-						invedNotesSig.unshift(invedNotesSig.pop());
-						if(invedAug6Point!=-1){ //对于非增六和弦无需进行此过程。
-							invedAug6Point=(invedAug6Point+1)%4;
-						}
+                        //替换和弦名字符串。
+                        let anchor=(invedName.indexOf("/")!=-1 ? invedName.indexOf("/") : invedName.length);
+                        let invSig="";
+                        while(invedName.charAt(anchor-1)>="0" && invedName.charAt(anchor-1)<="9"){
+                            invSig=invedName.charAt(anchor-1)+invSig;
+                            anchor--;
+                        }
+                        switch(invSig){
+                            case "7":
+                            invedName=invedName.slice(0,anchor)+"2"+invedName.slice(anchor+1);break;
+                            case "2":
+                            invedName=invedName.slice(0,anchor)+"34"+invedName.slice(anchor+1);break;
+                            case "34":
+                            invedName=invedName.slice(0,anchor)+"56"+invedName.slice(anchor+2);break;
+                            case "56":
+                            invedName=invedName.slice(0,anchor)+"7"+invedName.slice(anchor+2);break;
+                            case "":
+                            invedName=invedName.slice(0,anchor)+"46"+invedName.slice(anchor);break;
+                            case "46":
+                            invedName=invedName.slice(0,anchor)+"6"+invedName.slice(anchor+2);break;
+                            case "6":
+                            invedName=invedName.slice(0,anchor)+invedName.slice(anchor+1);
+                        }
+                        invedNotesSig.unshift(invedNotesSig.pop());
+                        if(invedAug6Point!=-1){ //对于非增六和弦无需进行此过程。
+                            invedAug6Point=(invedAug6Point+1)%4;
+                        }
                     }
-					//调整一下八度，将根音的相对音高小于等于-6（即升四/降五级音）的和弦升高一个八度，以限定和弦的音高范围。（就像前面那样。）
-					if(invedNotes[0]<=-6){
-						for(let i=0;i<invedNotes.length;i++) invedNotes[i]+=12;
-					}
-					//然后播放转位和弦。
-					playChord(invedNotes);
-					//显示转位和弦信息。
-					clearChordInfo(DBeforeTransBox);
-					DBeforeTransBox.style.backgroundColor=colors[tableData[g_Selected.hang][g_Selected.lie][0]];
-					DBeforeTransBox.textContent=invedName;
-					DBeforeTransBox.appendChild(document.createElement("br"));
-					if(invedAug6Point==-1){
-						DBeforeTransBox.append(invedNotesSig.join(""));
-					}else if(invedAug6Point!=3){
-						DBeforeTransBox.append(invedNotesSig.slice(0,invedAug6Point).join(""));
-						let tspan=document.createElement("span");
-						tspan.style.color="#FF0000";
-						tspan.textContent=invedNotesSig.slice(invedAug6Point,invedAug6Point+2).join("");
-						DBeforeTransBox.appendChild(tspan);
-						DBeforeTransBox.append(invedNotesSig.slice(invedAug6Point+2).join(""));
-					}else{
-						let tspan1=document.createElement("span");
-						tspan1.style.color="#FF0000";
-						tspan1.textContent=invedNotesSig[0];
-						DBeforeTransBox.appendChild(tspan1);
-						DBeforeTransBox.append(invedNotesSig.slice(1,3).join(""));
-						let tspan2=document.createElement("span");
-						tspan2.style.color="#FF0000";
-						tspan2.textContent=invedNotesSig[3];
-						DBeforeTransBox.appendChild(tspan2);
-					}
-					
-					//遍历单元格，先取消旧阴影再添加新阴影。（对于等音转调和非等音转调情况的判断条件不一样所以应分开实行。）
-					for(let tempHang=0;tempHang<24;tempHang++){
-						for(let tempLie=0;tempLie<42;tempLie++){
-							if(cells[tempHang][tempLie].hl.getAttribute("fill")==HlFill.shadowed || cells[tempHang][tempLie].hl.getAttribute("fill")==HlFill.transposable) cells[tempHang][tempLie].hl.setAttribute("fill",(tempHang+","+tempLie==g_Selected.coord() ? HlFill.selected : HlFill.none));
-						
-							if(FixedNotes(cells[tempHang][tempLie].notes).join()!=FixedNotes(invedNotes).join()){
-								cells[tempHang][tempLie].hl.setAttribute("fill",HlFill.shadowed);
-								//若转调后鼠标停留在的单元格由可转调和弦的变为不可转调和弦的，则需clear DAfterTransBox的ChordInfo。
-								if(tempHang+","+tempLie==g_Highlighted.coord()) clearChordInfo(DAfterTransBox);
-							}else if(tempHang+","+tempLie==g_Highlighted.coord()){ //若转位后鼠标正好停留在可转调和弦的单元格上
+                    //调整一下八度，将根音的相对音高小于等于-6（即升四/降五级音）的和弦升高一个八度，以限定和弦的音高范围。（就像前面那样。）
+                    if(invedNotes[0]<=-6){
+                        for(let i=0;i<invedNotes.length;i++) invedNotes[i]+=12;
+                    }
+                    //然后播放转位和弦。
+                    playChord(invedNotes);
+                    //显示转位和弦信息。
+                    clearChordInfo(DBeforeTransBox);
+                    DBeforeTransBox.style.backgroundColor=colors[tableData[g_Selected.hang][g_Selected.lie][0]];
+                    DBeforeTransBox.textContent=invedName;
+                    DBeforeTransBox.appendChild(document.createElement("br"));
+                    if(invedAug6Point==-1){
+                        DBeforeTransBox.append(invedNotesSig.join(""));
+                    }else if(invedAug6Point!=3){
+                        DBeforeTransBox.append(invedNotesSig.slice(0,invedAug6Point).join(""));
+                        let tspan=document.createElement("span");
+                        tspan.style.color="#FF0000";
+                        tspan.textContent=invedNotesSig.slice(invedAug6Point,invedAug6Point+2).join("");
+                        DBeforeTransBox.appendChild(tspan);
+                        DBeforeTransBox.append(invedNotesSig.slice(invedAug6Point+2).join(""));
+                    }else{
+                        let tspan1=document.createElement("span");
+                        tspan1.style.color="#FF0000";
+                        tspan1.textContent=invedNotesSig[0];
+                        DBeforeTransBox.appendChild(tspan1);
+                        DBeforeTransBox.append(invedNotesSig.slice(1,3).join(""));
+                        let tspan2=document.createElement("span");
+                        tspan2.style.color="#FF0000";
+                        tspan2.textContent=invedNotesSig[3];
+                        DBeforeTransBox.appendChild(tspan2);
+                    }
+                    
+                    //遍历单元格，先取消旧阴影再添加新阴影。（对于等音转调和非等音转调情况的判断条件不一样所以应分开实行。）
+                    for(let tempHang=0;tempHang<24;tempHang++){
+                        for(let tempLie=0;tempLie<42;tempLie++){
+                            if(cells[tempHang][tempLie].hl.getAttribute("fill")==HlFill.shadowed || cells[tempHang][tempLie].hl.getAttribute("fill")==HlFill.transposable) cells[tempHang][tempLie].hl.setAttribute("fill",(tempHang+","+tempLie==g_Selected.coord() ? HlFill.selected : HlFill.none));
+                        
+                            if(FixedNotes(cells[tempHang][tempLie].notes).join()!=FixedNotes(invedNotes).join()){
+                                cells[tempHang][tempLie].hl.setAttribute("fill",HlFill.shadowed);
+                                //若转调后鼠标停留在的单元格由可转调和弦的变为不可转调和弦的，则需clear DAfterTransBox的ChordInfo。
+                                if(tempHang+","+tempLie==g_Highlighted.coord()) clearChordInfo(DAfterTransBox);
+                            }else if(tempHang+","+tempLie==g_Highlighted.coord()){ //若转位后鼠标正好停留在可转调和弦的单元格上
                                 cells[tempHang][tempLie].hl.removeAttribute("visibility");
-								cells[tempHang][tempLie].hl.setAttribute("fill",HlFill.transposable);
-								showChordInfo(tempHang,tempLie,DAfterTransBox);
-							}
-						}
-					}
+                                cells[tempHang][tempLie].hl.setAttribute("fill",HlFill.transposable);
+                                showChordInfo(tempHang,tempLie,DAfterTransBox);
+                            }
+                        }
+                    }
                 }else{ //切回非等音转调模式
                     //console.log("切回非等音转调模式");
                     bDengyin=false;
                     //重新播放原和弦并在转调前和弦显示区中显示原和弦信息
-					playChord(cells[g_Selected.hang][g_Selected.lie].notes);
-					clearChordInfo(DBeforeTransBox);
-					showChordInfo(g_Selected.hang,g_Selected.lie,DBeforeTransBox);
+                    playChord(cells[g_Selected.hang][g_Selected.lie].notes);
+                    clearChordInfo(DBeforeTransBox);
+                    showChordInfo(g_Selected.hang,g_Selected.lie,DBeforeTransBox);
                     TDengyin.textContent="";
-					cells[g_Selected.hang][g_Selected.lie].hl.removeAttribute("visibility");
-					
-					//遍历单元格，先取消旧阴影再添加新阴影。
-					for(let tempHang=0;tempHang<24;tempHang++){
-						for(let tempLie=0;tempLie<42;tempLie++){
-							if(cells[tempHang][tempLie].hl.getAttribute("fill")==HlFill.shadowed || cells[tempHang][tempLie].hl.getAttribute("fill")==HlFill.transposable) cells[tempHang][tempLie].hl.setAttribute("fill",(tempHang+","+tempLie==g_Selected.coord() ? HlFill.selected : HlFill.none));
-						
-							if(FixedNotes(cells[tempHang][tempLie].notes).join()!=FixedNotes(cells[g_Selected.hang][g_Selected.lie].notes).join() || cells[tempHang][tempLie].notes.join()==cells[g_Selected.hang][g_Selected.lie].notes.join()){
-								cells[tempHang][tempLie].hl.setAttribute("fill",HlFill.shadowed);
-								//若转调后鼠标停留在的单元格由可转调和弦的变为不可转调和弦的，则需clear DAfterTransBox的ChordInfo。
-								if(tempHang+","+tempLie==g_Highlighted.coord()) clearChordInfo(DAfterTransBox);
-							}else if(tempHang+","+tempLie==g_Highlighted.coord()){ //若转位后鼠标正好停留在可转调和弦的单元格上
-								cells[tempHang][tempLie].hl.setAttribute("fill",HlFill.transposable);
-								showChordInfo(tempHang,tempLie,DAfterTransBox);
-							}
-						}
-					}
+                    cells[g_Selected.hang][g_Selected.lie].hl.removeAttribute("visibility");
+                    
+                    //遍历单元格，先取消旧阴影再添加新阴影。
+                    for(let tempHang=0;tempHang<24;tempHang++){
+                        for(let tempLie=0;tempLie<42;tempLie++){
+                            if(cells[tempHang][tempLie].hl.getAttribute("fill")==HlFill.shadowed || cells[tempHang][tempLie].hl.getAttribute("fill")==HlFill.transposable) cells[tempHang][tempLie].hl.setAttribute("fill",(tempHang+","+tempLie==g_Selected.coord() ? HlFill.selected : HlFill.none));
+                        
+                            if(FixedNotes(cells[tempHang][tempLie].notes).join()!=FixedNotes(cells[g_Selected.hang][g_Selected.lie].notes).join() || cells[tempHang][tempLie].notes.join()==cells[g_Selected.hang][g_Selected.lie].notes.join()){
+                                cells[tempHang][tempLie].hl.setAttribute("fill",HlFill.shadowed);
+                                //若转调后鼠标停留在的单元格由可转调和弦的变为不可转调和弦的，则需clear DAfterTransBox的ChordInfo。
+                                if(tempHang+","+tempLie==g_Highlighted.coord()) clearChordInfo(DAfterTransBox);
+                            }else if(tempHang+","+tempLie==g_Highlighted.coord()){ //若转位后鼠标正好停留在可转调和弦的单元格上
+                                cells[tempHang][tempLie].hl.setAttribute("fill",HlFill.transposable);
+                                showChordInfo(tempHang,tempLie,DAfterTransBox);
+                            }
+                        }
+                    }
                 }
             }
         }
-		e.preventDefault();
-	}
+        e.preventDefault();
+    }
 }
 
 let viewValue, width;
@@ -952,14 +952,14 @@ let tuliText=["七和弦及其等音","小七和弦及其等音","减小七和�
 let tuli=document.getElementById("tuli");
 for(let i=0;i<19;i++){
     let tuliDiv=document.createElement("div");
-	tuliDiv.style.backgroundColor=(colors[i]);
-	tuliDiv.textContent=tuliText[i];
-	if(i<=5){
-		let tuliSpan=document.createElement("span");
-		tuliSpan.textContent="增六";
-		tuliSpan.style.color="#FF0000";
-		tuliDiv.appendChild(tuliSpan);
-		tuliDiv.append((i!=5 ? "和弦" : "三和弦"));
-	}
-	tuli.appendChild(tuliDiv);
+    tuliDiv.style.backgroundColor=(colors[i]);
+    tuliDiv.textContent=tuliText[i];
+    if(i<=5){
+        let tuliSpan=document.createElement("span");
+        tuliSpan.textContent="增六";
+        tuliSpan.style.color="#FF0000";
+        tuliDiv.appendChild(tuliSpan);
+        tuliDiv.append((i!=5 ? "和弦" : "三和弦"));
+    }
+    tuli.appendChild(tuliDiv);
 }

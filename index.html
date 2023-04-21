@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+html,body{margin:0;padding:0;width:100%;height:100%}
+text{font-family:sans-serif;text-anchor:middle;dominant-baseline:middle;user-select:none;pointer-events:none}
+</style>
+<title>三度圈和弦大转盘玩具</title>
+</head>
+<body>
+<div id="dleft" style="overflow:hidden scroll;float:left;width:180px;height:100%;background-color:pink">
+初始调性主音：<select id="sinikeytonal">
+<option selected>C</option>
+<option>#C</option>
+<option>bD</option>
+<option>D</option>
+<option>#D</option>
+<option>bE</option>
+<option>E</option>
+<option>F</option>
+<option>#F</option>
+<option>bG</option>
+<option>G</option>
+<option>#G</option>
+<option>bA</option>
+<option>A</option>
+<option>#A</option>
+<option>bB</option>
+<option>B</option>
+<option>bC</option>
+</select>
+<hr>
+<div id="dchordbox" style="text-align:center"><br><br></div>
+<div id="dchorddescription"></div>
+<button type="button" id="bgetmajmin">选择对应同主大小调和弦</button>
+<hr>
+转调：<span id="tdengyin" style="color:#FF0000"></span>
+<br>
+<div id="dbeforetransbox" style="text-align:center;font-size:0.75em;line-height:1.5;width:45%;float:left"><br><br></div>
+<div style="text-align:center;width:10%;line-height:2;float:left">=</div>
+<div id="daftertransbox" style="text-align:center;font-size:0.75em;line-height:1.5;width:45%;float:left"><br><br></div>
+<hr>
+当前调性主音：<span id="tcurkeytonal"></span>
+<br>
+<button type="button" id="breset">复位</button>
+<hr>
+<button type="button" onclick="window.location.href='#dmanual'">说明</button>
+<br>
+图例：
+<br>
+<div id="tuli" style="text-align:center;width:100%;font-size:0.75em;line-height:1.75"></div>
+</div>
+<div id="dright" style="overflow:auto;height:100%;background-color:#FFFF80">
+<div style="position:fixed;pointer-events:none;user-select:none;top:0"><input id="iviewsize" type="range" min="0.25" max="5" step="0.05" style="pointer-events:auto"><span id="tsize"></span></div>
+<h1 style="line-height:0;width:100%;text-align:center">三度圈和弦大转盘玩具</h1>
+<svg xmlns="http://www.w3.org/2000/svg" id="svg" viewBox="-33 -33 66 66"></svg>
+<div id="dmanual">
+<h2>说明</h2>
+<p>将调内三和弦、七和弦及其对应常见变和弦，以及各组离调和弦按三度关系围成圈组成的转盘，以体现不同和弦结构与和声进行的转盘玩具。</p>
+<p>转盘共分为七组扇区，分别代表以按三度关系排列的调式各级音为根音建立的和弦，以顺时针方向为向上三度方向；其中每组扇区之内靠近顺时针方向的为大调内和弦，靠近逆时针方向的为小调内和弦。共分为六组圈层，分别代表主调内和弦与向各级调的离调和弦，以从外到内的方向为向上三度方向，并以离调和弦在主调中对应级数将主调和弦与离调和弦对齐；其中第四组圈层代表向大调的SII或小调的dVII的离调和弦（因为大调的DVII和小调的sII三和弦为减三和弦，无法用于离调，故作此安排）。各组扇区、各组圈层之间以红线隔开。在底盘上标有各扇区所对应的级数。</p>
+<p>在每组扇区之内，靠近中线的一列为不含变音的调式原始和弦，向外一列为降调式二级音的变和弦，最外列为大调式中升调式二级音或小调式中降调式四级音的变和弦。在每组圈层之内，位于同一个小圈层之内的代表属于同一个调式，并从外到内将自然调式与和声调式并列，再将三和弦与七和弦并列。</p>
+<p>用不同背景色代表不同种类和弦，以方便进行转调。其中将各类小七度和弦与其对应的等音增六和弦赋以相同背景色，以方便进行等音转调（增六和弦以原位标示）。部分单元格之内标有和弦名称及和弦组成音，其中用红色字标出所有的增六度。若未标，则：若为和声调式的和弦，且其对应自然调式的和弦标有且与其背景色相同，则表示与其对应自然调式的和弦相同；否则，若其所在扇区组内其所在行的靠近中线方向上存在与其背景色相同的和弦，则表示与该和弦相同；否则表示与其所在扇区组内对应的调内非变和弦中背景色相同的和弦相同。</p>
+<p>点击每个和弦所在的单元格可选中该和弦，再次点击或点击空白区域可取消选中。选中一个和弦时将自动播放当前调性主音下的该和弦。使用键盘方向键可选择不同单元格和弦，若同时按住ctrl键则可直接跳至不同扇区或圈层内对应位置的单元格和弦。点击“选择对应同主大小调和弦”按钮或点击键盘回车键可切换至与当前选中的和弦对应的同主音大/小调和弦。左上方的和弦显示区内可显示当前选中的和弦或鼠标经过处所在单元格的和弦。</p>
+<p>使用ctrl+鼠标滚轮或上方拖动条可缩放圆盘。</p>
+<p>单元格可拖动，用于转调。转调时，鼠标选中一个单元格并拖动，被选中的单元格和弦将作为中介和弦在旧调中的和声意义进行转调。将选中的和弦拖动至该和弦在新调中的和声意义所对应的单元格上并松开鼠标，即可完成转调。其中减七和弦、各类小七度和弦与增三和弦可用于等音转调。等音转调时，鼠标选中该和弦所在单元格并按住鼠标，此时按回车键可将其切换至不同的可用于等音转调的转位和弦并作为中介和弦在旧调中的和声意义，然后将切换转位后的该和弦拖动至其在新调中的和声意义（不考虑转位）所对应的单元格上（或不拖动，当中介和弦在新旧调当中的和声意义相同时）并松开鼠标，即可完成等音转调。拖动时，与被拖动单元格和弦当前转位具有相同的组成音结构的和弦以外的单元格将以阴影显示。转调过程中，中介和弦在新旧调内的和声意义将在左边的转调栏中显示。转调后，转盘部分将自动旋转至新调的主和弦扇区与底盘上标有的其在原调中所对应级数的扇区对齐。
+<p>可在页面左上方设置初始调性主音，默认为C调。发生转调时，当前调性主音将改变，但不会影响初始调性主音。点击“复位”按钮可重设当前调性主音至初始调性主音并重设转盘旋转状态。</p>
+<p>转盘中心部分标有表示通常可能的和声进行的箭头，其中蓝色箭头表示依靠类属→主的基本关系建立的连接。任何箭头均可朝双向进行。箭头可能指向对应扇区组中的任何一个和弦，且同一组扇区中的不同和弦亦可能建立连接。选中一个单元格后，鼠标点击相应箭头可切换至箭头所代表的基本和声进行后的和弦。</p>
+<p>点击页面右上方的“撤销”/“重做”按钮或使用快捷键ctrl+C/ctrl+V可撤销/重做至前/后一步骤状态。</p>
+<span style="text-align:right">
+<p>安可挣扎着用魔法.</p>
+</span>
+</div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-# Circle-of-Thirds-Turnable-Toy
+# Circle-of-Thirds Turnable Toy（三度圈和弦大转盘玩具）
 Circle-of-thirds turnable toy, for feeling musical harmony processes. In Chinese only (maybe English in future).
 On HTML & SVG.
 
